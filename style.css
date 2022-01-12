@@ -1,9 +1,9 @@
 * {
     margin: 0px;
+    font-family: 'Architects Daughter', cursive;
 }
 
 body {
-    background-color: #191919;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,38 +13,39 @@ body {
     text-align: center;
     height: 150px;
     width: 100%;
-    color: white;
 }
 
 #add {
-    width: 500px;
+    width: 50%;
     height: 30px;
 }
 
 button {
     width: 60px;
     height: 30px;
-    background-color: white;
     border-radius: 10px;
 }
 
 .list_container {
     border-radius: 10px;
-    text-align: center;
-    font-size: 50px;
-    width: 50%;
+    font-size: 2em;
     height: auto;
-    background-color: #BB4430;
 }
 
-#ul {
-    list-style: none;
+#ol {
+    padding: 0px;
 }
 
-.fa-times-circle {
-    float: right;
+li {
+    border: 2px solid black;
 }
 
-.fa-check-circle {
-    float: left;
+#checked {
+    text-decoration: line-through;
 }
+#li_container {
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+}
+
