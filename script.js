@@ -1,35 +1,66 @@
-const ul = document.getElementById("ul");
-var listArr = [];
-const li = document.getElementsByTagName("LI");
+  const ol = document.getElementById("ol");
+  var listArr = [];
+  const li = document.getElementsByTagName("LI");
+  var i = localStorage.length;
+  
 
-function createList() {
-    var i = localStorage.length;
+  function addListToLocalstorage() {
     i += 1;
     var listItem = document.getElementById("add").value;
-    localStorage.setItem(i, listItem);
-    addList()
-}
+    if(listItem === "") {
+      alert('You must write something')
+    } else {
+      localStorage.setItem(`Task${i}`, listItem);
+      createList();
+    }
+  }
 
-function addList() {
-    let add = localStorage.length
-    let Content = localStorage.getItem(add)
-    ul.innerHTML += `<li id="tasks"><i class="fas fa-check-circle"></i>${Content}<i class="fas fa-times-circle"></i></li>`
-}
+  function createList() {
+    let add = localStorage.length;
+    let Content = localStorage.getItem(`Task${i}`);
+    ol.innerHTML += `<div id="li_container"><li class="Task${i}">${Content}</li><i id="close" class="far fa-times-circle"></i></div>`;
+  }
 
 function displayList() {
-    for(let n=1; n<=localStorage.length; n++) {
-        let listContent = localStorage.getItem(n)
-        ul.innerHTML += `<li id="tasks"><i class="fas fa-check-circle"></i>${listContent}<i class="fas fa-times-circle"></i></li>`;
+    for (let n = 0; n <= localStorage.length; n++) {
+      let listContent = localStorage.getItem(`Task${n}`);
+      if (listContent) {
+        ol.innerHTML += `<div id="li_container"><li class="Task${n}" id="unchecked">${listContent}</li><i id="close" class="far fa-times-circle"></i></div>`;
+      }
     }
+    for (let n = 0; n < localStorage.length; n++) {
+      var status = `Task${n}`;
+      if(localStorage.getItem(`${status} checked`) === 'true') {
+        $(`.Task${n}`).attr('id','checked')
+      }
+    } 
 }
+  
 
+  $(document).ready(function () {
+    $("#ol").on("click", "li", function () {
+      var clickedElementClass;
+      if($(this).attr("id") === "unchecked") {
+            clickedElementClass = $(this).attr("class");
+            localStorage.setItem(`${clickedElementClass} checked`, "true");
+            $(this).attr("id", "checked");
+      } else if($(this).attr("id") === "checked") {
+        $(this).attr("id", "unchecked");
+        for(let i=0;i<localStorage.length;i++) {
+          if($(this).attr("class") === `Task${i}`) {
+            localStorage.removeItem(`Task${i} checked`)
+          }
+        }
+      }
+    });
+  });
 
-
-
-
-
-/*var li = document.createElement('li');
-var displayItem = localStorage.getItem(n)
-li.appendChild(document.createTextNode(displayItem))
-ul.appendChild(li)
-console.log(n)*/
+  $(document).on('click', '#close', function () {
+    let key = $(this).prev().attr('class');
+    let checkedKey = `${key} checked`;
+    localStorage.removeItem(key)
+    localStorage.removeItem(checkedKey);
+    $(this).prev().hide();
+    $(this).hide();
+    i -= 1;
+  })
