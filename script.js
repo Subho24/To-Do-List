@@ -1,6 +1,7 @@
 const ol = document.getElementById("ol");
 var i = findTasks()
 
+//Getting all the keys from localStorage that conatains the "Tasks" and returning the max value among all the keys;
 function findTasks() {
   let keys = Object.keys(localStorage);
   let taskArr = [];
@@ -19,6 +20,7 @@ function findTasks() {
 
 
 function addListToLocalstorage() {
+  //adding 1 to i so that every new task can have a different key in local storage;
   i += 1;
   var listItem = document.getElementById("add").value;
   if(listItem === "") {
@@ -27,20 +29,24 @@ function addListToLocalstorage() {
     localStorage.setItem(i, listItem);
     createList();
   }
+  //Emptying the input box after adding the task;
   document.getElementById("add").value = '';
 }
 
+//Binding the enter key to the "Add" button;
 $('#add').keyup(function(event) {
   if(event.which === 13) {
     addListToLocalstorage();
   }
 })
 
+//displaying the newly added task;
 function createList() {
   let Content = localStorage.getItem(i);
   ol.innerHTML += `<div id="li_container"><li class="${i}">${Content}</li><i id="close" class="far fa-times-circle"></i></div>`;
 }
 
+//Displaying all the task and from localStorage everytime the page is refreshed. Also checking if the task is checked or not.
 function displayList() {
   let loopLength = findTasks();
   for (let n = 0; n <= loopLength; n++) {
@@ -56,6 +62,8 @@ function displayList() {
   } 
 }
 
+
+//Adding a check and uncheck option when click on the task. 
 $(document).ready(function () {
   $("#ol").on("click", "li", function () {
     let loopLength = findTasks();
@@ -64,17 +72,17 @@ $(document).ready(function () {
           clickedElementClass = $(this).attr("class");
           localStorage.setItem(`${clickedElementClass} checked`, "true");
           $(this).attr("id", "checked");
+          console.log($(this))
     } else if($(this).attr("id") === "checked") {
       $(this).attr("id", "unchecked");
-      for(let i=0;i<loopLength;i++) {
-        if($(this).attr("class") === i) {
-          localStorage.removeItem(`${i} checked`)
-        }
-      }
+      clickedElementClass = $(this).attr("class");
+      localStorage.removeItem(`${clickedElementClass} checked`)
     }
   });
 });
 
+
+//Adding a remove option to delete the task from local storage. 
 $(document).on('click', '#close', function () {
   let key = $(this).prev().attr('class');
   let checkedKey = `${key} checked`;
