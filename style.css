@@ -11,7 +11,7 @@ body {
 }
 .nav {
     text-align: center;
-    height: 150px;
+    height: 10%;
     width: 100%;
 }
 
@@ -28,8 +28,9 @@ button {
 
 .list_container {
     border-radius: 10px;
-    font-size: 2em;
+    font-size: 1.5em;
     height: auto;
+    margin: 5%;
 }
 
 #ol {
