@@ -49,3 +49,12 @@ li {
     display: flex;
 }
 
+#instructions {
+    display: inline-flex
+}
+
+#instructions p {
+    padding-left: 2%;
+    margin-bottom: 1%;
+    border: 2px dotted black;
+}
