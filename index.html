@@ -15,6 +15,11 @@
 <body onload="displayList()">
     <div class="nav">
         <h1>Create your To-Do list</h1>
+        <div id="instructions">
+            <p id="check">Click on the task once you done with it</p>
+            <p id="uncheck">Click again if you want to redo the task</p>
+            <p id="remove">Remove the completed tasks</p>
+        </div>
         <input type="text" placeholder="Empty your mind" id="add">
         <button id="AddToList" onclick="addListToLocalstorage()">Add</button>
     </div>
