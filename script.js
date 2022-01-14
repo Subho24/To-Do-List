@@ -55,7 +55,7 @@ function displayList() {
       ol.innerHTML += `<div id="li_container"><li class="${n}" id="unchecked">${listContent}</li><i id="close" class="far fa-times-circle"></i></div>`;
     }
   }
-  for (let n = 0; n < loopLength; n++) {
+  for (let n = 0; n <= loopLength; n++) {
     if(localStorage.getItem(`${n} checked`) === 'true') {
       $(`.${n}`).attr('id','checked')
     }
