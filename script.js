@@ -33,6 +33,10 @@ function addListToLocalstorage() {
   document.getElementById("add").value = '';
 }
 
+
+let test = fetch('https://letcapitbackend.herokuapp.com/api/resources/resources');
+console.log(test);
+
 //Binding the enter key to the "Add" button;
 $('#add').keyup(function(event) {
   if(event.which === 13) {
