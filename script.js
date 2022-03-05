@@ -35,7 +35,7 @@ function addListToLocalstorage() {
 
 
 let test = fetch('https://letcapitbackend.herokuapp.com/api/resources/resources');
-console.log(test.body);
+console.log(test.json());
 
 //Binding the enter key to the "Add" button;
 $('#add').keyup(function(event) {
